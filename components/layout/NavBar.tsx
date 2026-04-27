@@ -2,35 +2,34 @@
 
 import { useState } from "react";
 import { Car, Menu, X } from "lucide-react";
-import Button from "../ui/Button";
 
-const NAV_LINKS = ["Home", "Services", "About", "Contact", "Legal"];
+const NAV_LINKS = ["Home", "Services", "About", "Contact"];
 
 function NavLogo() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       <div
         style={{
-          width: 36,
-          height: 36,
-          borderRadius: 8,
-          backgroundColor: "#f97316",
+          width: 40,
+          height: 40,
+          borderRadius: 10,
+          background: "#ff6b35",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Car style={{ width: 20, height: 20, color: "#fff" }} />
+        <Car style={{ width: 22, height: 22, color: "#fff" }} />
       </div>
       <div>
-        <div style={{ fontSize: 18, fontWeight: 800, color: "#111827", lineHeight: 1.1 }}>Vahan</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: "#ffffff", lineHeight: 1.1 }}>Vahan</div>
         <div
           style={{
-            fontSize: 9,
-            fontWeight: 700,
-            letterSpacing: "0.18em",
+            fontSize: 10,
+            fontWeight: 600,
+            letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "#f97316",
+            color: "#60a5fa",
           }}
         >
           Solutions
@@ -50,14 +49,14 @@ function NavLinks() {
           style={{
             fontSize: 14,
             fontWeight: 500,
-            color: i === 0 ? "#f97316" : "#374151",
+            color: "rgba(255, 255, 255, 0.9)",
             textDecoration: "none",
-            borderBottom: i === 0 ? "2px solid #f97316" : "none",
-            paddingBottom: 2,
+            transition: "color 0.3s ease",
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#ff6b35")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255, 255, 255, 0.9)")}
         >
           {item}
-          {item === "Legal" ? " ▾" : ""}
         </a>
       ))}
     </div>
@@ -67,8 +66,36 @@ function NavLinks() {
 function NavButtons() {
   return (
     <div className="nav-desktop-buttons" style={{ gap: 12, alignItems: "center" }}>
-      <Button variant="outline" size="md">Login</Button>
-      <Button variant="primary" size="md">🚀 Get Free Help</Button>
+      <button
+        style={{
+          padding: "10px 24px",
+          background: "transparent",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          borderRadius: 10,
+          color: "#ffffff",
+          fontSize: 14,
+          fontWeight: 600,
+          cursor: "pointer",
+          transition: "all 0.3s ease",
+        }}
+      >
+        Login
+      </button>
+      <button
+        style={{
+          padding: "10px 24px",
+          background: "#ff6b35",
+          border: "none",
+          borderRadius: 10,
+          color: "#ffffff",
+          fontSize: 14,
+          fontWeight: 600,
+          cursor: "pointer",
+          transition: "all 0.3s ease",
+        }}
+      >
+        🚀 Get Free Help
+      </button>
     </div>
   );
 }
@@ -79,22 +106,37 @@ function MobileMenu({ open }: { open: boolean }) {
     <div
       className="nav-mobile-menu"
       style={{
-        backgroundColor: "#fff",
-        padding: "12px 24px 16px",
+        backgroundColor: "#1e3a5f",
+        padding: "20px 24px",
         flexDirection: "column",
-        gap: 14,
+        gap: 16,
+        borderTop: "1px solid rgba(255, 255, 255, 0.1)",
       }}
     >
       {NAV_LINKS.map((item) => (
         <a
           key={item}
           href={"#" + item.toLowerCase()}
-          style={{ fontSize: 14, color: "#374151", textDecoration: "none" }}
+          style={{ fontSize: 14, color: "rgba(255, 255, 255, 0.9)", textDecoration: "none" }}
         >
           {item}
         </a>
       ))}
-      <Button variant="primary" size="md" fullWidth>🚀 Get Free Help</Button>
+      <button
+        style={{
+          width: "100%",
+          padding: "12px 24px",
+          background: "#ff6b35",
+          border: "none",
+          borderRadius: 10,
+          color: "#ffffff",
+          fontSize: 14,
+          fontWeight: 600,
+          cursor: "pointer",
+        }}
+      >
+        🚀 Get Free Help
+      </button>
     </div>
   );
 }
@@ -110,9 +152,9 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 50,
-        backgroundColor: "#ffffff",
-        borderBottom: "1px solid #e5e7eb",
-        boxShadow: "0 1px 8px rgba(0,0,0,0.08)",
+        backgroundColor: "#1e3a5f",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
       }}
     >
       <style>{`
@@ -147,7 +189,7 @@ export default function Navbar() {
         <button
           className="nav-mobile-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: "none", border: "none", cursor: "pointer", color: "#111827" }}
+          style={{ background: "none", border: "none", cursor: "pointer", color: "#ffffff" }}
         >
           {menuOpen ? <X style={{ width: 24, height: 24 }} /> : <Menu style={{ width: 24, height: 24 }} />}
         </button>
