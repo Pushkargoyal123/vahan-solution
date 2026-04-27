@@ -34,10 +34,11 @@ export default function HeroSection() {
           height: "100%",
           objectFit: "cover",
           zIndex: 0,
-          opacity: 0.4,
+          opacity: 0.55, // was 0.35
+          // remove mixBlendMode entirely
         }}
       >
-        <source src="https://cdn.pixabay.com/video/2020/04/17/36617-410755929_large.mp4" type="video/mp4" />
+        <source src="/assets/vid-D2aLfXaI.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -46,7 +47,9 @@ export default function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(135deg, rgba(30, 58, 95, 0.85) 0%, rgba(20, 40, 70, 0.9) 100%)",
+          background:
+            "linear-gradient(135deg, rgba(30, 58, 95, 0.65) 0%, rgba(20, 40, 70, 0.72) 100%)",
+          // was 0.85 and 0.9 — reduced to let video breathe
           zIndex: 1,
         }}
       />
@@ -168,10 +171,13 @@ export default function HeroSection() {
             color: "#ffffff",
           }}
         >
-          Check & Pay<br />
-          <span style={{ 
-            color: "#ff6b35",
-          }}>
+          Check & Pay
+          <br />
+          <span
+            style={{
+              color: "#ff6b35",
+            }}
+          >
             Traffic Challans
           </span>
         </h1>
@@ -185,14 +191,17 @@ export default function HeroSection() {
         >
           Anytime . Anywhere
         </h2>
-        <p style={{ 
-          color: "rgba(255,255,255,0.9)", 
-          fontSize: 18, 
-          marginBottom: 48,
-          maxWidth: 600,
-          margin: "0 auto 48px",
-        }}>
-          No queues. No court visits. Privacy-first OTP reveal — 100% secure & transparent.
+        <p
+          style={{
+            color: "rgba(255,255,255,0.9)",
+            fontSize: 18,
+            marginBottom: 48,
+            maxWidth: 600,
+            margin: "0 auto 48px",
+          }}
+        >
+          No queues. No court visits. Privacy-first OTP reveal — 100% secure &
+          transparent.
         </p>
 
         {/* Vehicle Input Card */}

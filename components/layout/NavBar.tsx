@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Car, Menu, X } from "lucide-react";
+import LoginModal from "../Modal/LoginModal";
+import SignUpModal from "../Modal/SignUpModal";
 
 const NAV_LINKS = ["Home", "Services", "About", "Contact"];
 
@@ -22,7 +24,16 @@ function NavLogo() {
         <Car style={{ width: 22, height: 22, color: "#fff" }} />
       </div>
       <div>
-        <div style={{ fontSize: 20, fontWeight: 800, color: "#ffffff", lineHeight: 1.1 }}>Vahan</div>
+        <div
+          style={{
+            fontSize: 20,
+            fontWeight: 800,
+            color: "#ffffff",
+            lineHeight: 1.1,
+          }}
+        >
+          Vahan
+        </div>
         <div
           style={{
             fontSize: 10,
@@ -41,7 +52,10 @@ function NavLogo() {
 
 function NavLinks() {
   return (
-    <div className="nav-desktop-links" style={{ gap: 32, alignItems: "center" }}>
+    <div
+      className="nav-desktop-links"
+      style={{ gap: 32, alignItems: "center" }}
+    >
       {NAV_LINKS.map((item, i) => (
         <a
           key={item}
@@ -54,7 +68,9 @@ function NavLinks() {
             transition: "color 0.3s ease",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#ff6b35")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255, 255, 255, 0.9)")}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.color = "rgba(255, 255, 255, 0.9)")
+          }
         >
           {item}
         </a>
@@ -63,10 +79,14 @@ function NavLinks() {
   );
 }
 
-function NavButtons() {
+function NavButtons({ onLoginClick }: { onLoginClick: () => void }) {
   return (
-    <div className="nav-desktop-buttons" style={{ gap: 12, alignItems: "center" }}>
+    <div
+      className="nav-desktop-buttons"
+      style={{ gap: 12, alignItems: "center" }}
+    >
       <button
+        onClick={onLoginClick}
         style={{
           padding: "10px 24px",
           background: "transparent",
@@ -117,7 +137,11 @@ function MobileMenu({ open }: { open: boolean }) {
         <a
           key={item}
           href={"#" + item.toLowerCase()}
-          style={{ fontSize: 14, color: "rgba(255, 255, 255, 0.9)", textDecoration: "none" }}
+          style={{
+            fontSize: 14,
+            color: "rgba(255, 255, 255, 0.9)",
+            textDecoration: "none",
+          }}
         >
           {item}
         </a>
@@ -143,21 +167,23 @@ function MobileMenu({ open }: { open: boolean }) {
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [modal, setModal] = useState<"none" | "login" | "signup">("none");
 
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        backgroundColor: "#1e3a5f",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-      }}
-    >
-      <style>{`
+    <>
+      <nav
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          backgroundColor: "#1e3a5f",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <style>{`
         .nav-desktop-links { display: flex; }
         .nav-desktop-buttons { display: flex; }
         .nav-mobile-toggle { display: none; }
@@ -171,31 +197,51 @@ export default function Navbar() {
         }
       `}</style>
 
-      <div
-        style={{
-          maxWidth: "1280px",
-          margin: "0 auto",
-          padding: "12px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <NavLogo />
-        <NavLinks />
-        <NavButtons />
-
-        {/* Mobile hamburger */}
-        <button
-          className="nav-mobile-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: "none", border: "none", cursor: "pointer", color: "#ffffff" }}
+        <div
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "12px 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
         >
-          {menuOpen ? <X style={{ width: 24, height: 24 }} /> : <Menu style={{ width: 24, height: 24 }} />}
-        </button>
-      </div>
+          <NavLogo />
+          <NavLinks />
+          <NavButtons  onLoginClick={() => setModal("login")}/>
 
-      <MobileMenu open={menuOpen} />
-    </nav>
+          {/* Mobile hamburger */}
+          <button
+            className="nav-mobile-toggle"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "#ffffff",
+            }}
+          >
+            {menuOpen ? (
+              <X style={{ width: 24, height: 24 }} />
+            ) : (
+              <Menu style={{ width: 24, height: 24 }} />
+            )}
+          </button>
+        </div>
+
+        <MobileMenu open={menuOpen} />
+      </nav>
+       <LoginModal
+        isOpen={modal === "login"}
+        onClose={() => setModal("none")}
+        onSwitchToSignUp={() => setModal("signup")}  // add this prop to LoginModal too
+      />
+      <SignUpModal
+        isOpen={modal === "signup"}
+        onClose={() => setModal("none")}
+        onSwitchToLogin={() => setModal("login")}
+      />
+    </>
   );
 }
