@@ -1,72 +1,77 @@
 import { Mail, Phone } from "lucide-react";
 
+const QUICK_LINKS = ["Home", "Services", "About", "Contact"];
+const LEGAL_LINKS = ["Privacy Policy", "Terms & Conditions", "Refund Policy", "Disclaimer"];
+
+const SOCIAL = [
+  { label: "f",  href: "https://facebook.com/vahansolutions",        color: "#1877f2" },
+  { label: "𝕏",  href: "https://twitter.com/vahansolutions",         color: "#18181b" },
+  { label: "in", href: "https://linkedin.com/company/vahansolutions", color: "#0a66c2" },
+  { label: "💬", href: "https://wa.me/919311933793",                  color: "#25d366" },
+];
+
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#f7fafc", borderTop: "1px solid #e2e8f0" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "60px 24px 30px" }}>
+    <footer className="footer-root">
+      <div className="vs-container" style={{ padding: "64px 24px 32px" }}>
+        {/* Grid */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
             gap: 40,
-            marginBottom: 40,
+            marginBottom: 44,
           }}
         >
-          {/* Company Info */}
+          {/* Brand column */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <div
                 style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: 6,
-                  background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  width: 34, height: 34, borderRadius: 8, flexShrink: 0,
+                  background: "linear-gradient(135deg,#ff6b35,#e85c24)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: 18,
                 }}
               >
                 🚗
               </div>
               <div>
-                <span style={{ fontSize: 18, fontWeight: 800, color: "#1a202c" }}>Vahan </span>
+                <span style={{ fontSize: 18, fontWeight: 800, color: "#fff" }}>Vahan </span>
                 <span style={{ fontSize: 18, fontWeight: 800, color: "#ff6b35" }}>Solutions</span>
               </div>
             </div>
-            <p style={{ fontSize: 14, lineHeight: 1.7, color: "#718096", marginBottom: 20 }}>
-              India's most trusted platform for traffic challan clearance — transparent, privacy-first, 100% legal.
+
+            <p
+              style={{
+                fontSize: 14, lineHeight: 1.75,
+                color: "rgba(255,255,255,.5)", marginBottom: 20,
+              }}
+            >
+              India's most trusted platform for traffic challan clearance —
+              transparent, privacy-first, 100% legal.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <a
                 href="mailto:help@vahansolutions.com"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  fontSize: 14,
-                  color: "#2563eb",
-                  textDecoration: "none",
+                  display: "flex", alignItems: "center", gap: 8,
+                  fontSize: 14, color: "#93c5fd", textDecoration: "none",
                 }}
               >
-                <Mail style={{ width: 16, height: 16 }} />
-                help@vahansolutions.com
+                <Mail size={15} /> help@vahansolutions.com
               </a>
               <a
                 href="tel:+919311933793"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  fontSize: 14,
-                  color: "#dc2626",
-                  textDecoration: "none",
+                  display: "flex", alignItems: "center", gap: 8,
+                  fontSize: 14, color: "#fca5a5", textDecoration: "none",
                 }}
               >
-                <Phone style={{ width: 16, height: 16 }} />
-                +91 93119 33793
+                <Phone size={15} /> +91 93119 33793
               </a>
-              <p style={{ fontSize: 12, color: "#a0aec0", marginTop: 8 }}>
+              <p style={{ fontSize: 12, color: "rgba(255,255,255,.28)", marginTop: 4 }}>
                 GSTIN: 07BYCPS8901F1ZB
               </p>
             </div>
@@ -74,149 +79,77 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: "#1a202c", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-              Quick Links
-            </h4>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {["Home", "Services", "About", "Contact"].map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  style={{
-                    fontSize: 14,
-                    color: "#718096",
-                    textDecoration: "none",
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  {link}
-                </a>
-              ))}
-            </div>
+            <h4 className="footer-h">Quick Links</h4>
+            {QUICK_LINKS.map((link) => (
+              <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
+                {link}
+              </a>
+            ))}
           </div>
 
           {/* Legal */}
           <div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: "#1a202c", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-              Legal
-            </h4>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {["Privacy Policy", "Terms & Conditions", "Refund Policy", "Disclaimer"].map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  style={{
-                    fontSize: 14,
-                    color: "#718096",
-                    textDecoration: "none",
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  {link}
-                </a>
-              ))}
-            </div>
+            <h4 className="footer-h">Legal</h4>
+            {LEGAL_LINKS.map((link) => (
+              <a key={link} href="#" className="footer-link">{link}</a>
+            ))}
           </div>
 
-          {/* Follow Us & Newsletter */}
+          {/* Social + Newsletter */}
           <div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: "#1a202c", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-              Follow Us
-            </h4>
-            <div style={{ display: "flex", gap: 12, marginBottom: 24 }}>
-              {[
-                { name: "f", color: "#1877f2", href: "https://facebook.com/vahansolutions" },
-                { name: "𝕏", color: "#000000", href: "https://twitter.com/vahansolutions" },
-                { name: "in", color: "#0a66c2", href: "https://linkedin.com/company/vahansolutions" },
-                { name: "💬", color: "#25d366", href: "https://wa.me/919311933793" },
-              ].map((social, i) => (
+            <h4 className="footer-h">Follow Us</h4>
+            <div style={{ display: "flex", gap: 10, marginBottom: 28 }}>
+              {SOCIAL.map((s, i) => (
                 <a
                   key={i}
-                  href={social.href}
+                  href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 10,
-                    background: social.color,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "all 0.3s ease",
-                    textDecoration: "none",
-                    color: "#ffffff",
-                    fontSize: 16,
-                    fontWeight: 700,
-                  }}
+                  className="footer-social"
+                  style={{ background: s.color }}
                 >
-                  {social.name}
+                  {s.label}
                 </a>
               ))}
             </div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: "#1a202c", marginBottom: 12, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-              Newsletter
-            </h4>
+
+            <h4 className="footer-h">Newsletter</h4>
             <div style={{ display: "flex", gap: 8 }}>
               <input
                 type="email"
                 placeholder="your@email.com"
                 style={{
-                  flex: 1,
-                  padding: "10px 14px",
-                  border: "1px solid #e2e8f0",
-                  borderRadius: 8,
-                  fontSize: 14,
-                  outline: "none",
-                  fontFamily: "Inter, sans-serif",
+                  flex: 1, padding: "10px 14px",
+                  border: "1px solid rgba(255,255,255,.12)",
+                  borderRadius: 8, fontSize: 14,
+                  background: "rgba(255,255,255,.07)",
+                  color: "#fff", outline: "none", fontFamily: "inherit",
                 }}
               />
-              <button
-                style={{
-                  padding: "10px 20px",
-                  background: "#2563eb",
-                  border: "none",
-                  borderRadius: 8,
-                  color: "#ffffff",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                }}
-              >
-                GO →
-              </button>
+              <button className="footer-newsletter-btn">GO →</button>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        <hr className="footer-divider" />
+
+        {/* Bottom bar */}
         <div
           style={{
-            paddingTop: 30,
-            borderTop: "1px solid #e2e8f0",
+            paddingTop: 24,
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
-            gap: 16,
+            gap: 12,
           }}
         >
-          <p style={{ fontSize: 14, color: "#a0aec0" }}>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,.3)" }}>
             © {new Date().getFullYear()} Vahan Solutions. All rights reserved.
           </p>
           <div style={{ display: "flex", gap: 20 }}>
-            {["Sitemap", "Blog", "News"].map((link) => (
-              <a
-                key={link}
-                href="#"
-                style={{
-                  fontSize: 14,
-                  color: "#a0aec0",
-                  textDecoration: "none",
-                }}
-              >
-                {link}
-              </a>
+            {["Sitemap", "Blog", "News"].map((l) => (
+              <a key={l} href="#" className="footer-bottom-link">{l}</a>
             ))}
           </div>
         </div>

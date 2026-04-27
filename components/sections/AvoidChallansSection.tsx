@@ -1,46 +1,22 @@
 const RULES = [
-  { emoji: "🚫🍺", text: "Do not drink and drive", penalty: "₹10,000" },
-  { emoji: "🚦", text: "Always follow traffic signals", penalty: "₹5,000" },
-  { emoji: "🛡️", text: "Wear safety gears like seat belt", penalty: "₹1,000" },
-  { emoji: "📵", text: "Avoid using mobile phone while driving", penalty: "₹5,000" },
-  { emoji: "📄", text: "Carry valid documents while driving", penalty: "Upto ₹10,000" },
-  { emoji: "⚡", text: "Always stick to the speed limit", penalty: "₹5,000" },
+  { emoji: "🚫🍺", text: "Do not drink and drive",               penalty: "₹10,000" },
+  { emoji: "🚦",   text: "Always follow traffic signals",         penalty: "₹5,000"  },
+  { emoji: "🛡️",   text: "Wear safety gears like seat belt",      penalty: "₹1,000"  },
+  { emoji: "📵",   text: "Avoid using mobile phone while driving", penalty: "₹5,000"  },
+  { emoji: "📄",   text: "Carry valid documents while driving",   penalty: "Upto ₹10,000" },
+  { emoji: "⚡",   text: "Always stick to the speed limit",       penalty: "₹5,000"  },
 ];
 
 export default function AvoidChallansSection() {
   return (
-    <section style={{ padding: "80px 0", backgroundColor: "#ffffff" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
+    <section className="section-pad" style={{ background: "var(--bg)" }}>
+      <div className="vs-container">
+        <div style={{ textAlign: "center", marginBottom: 52 }}>
+          <span className="vs-label">Stay Safe</span>
+          <h2 className="vs-h2">How to Avoid Challans?</h2>
           <p
-            style={{
-              fontSize: 14,
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#ff6b35",
-              marginBottom: 12,
-            }}
-          >
-            Stay Safe
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(32px, 5vw, 48px)",
-              fontWeight: 800,
-              color: "#1a202c",
-              marginBottom: 16,
-            }}
-          >
-            How to Avoid Challans?
-          </h2>
-          <p
-            style={{
-              fontSize: 16,
-              color: "#718096",
-              maxWidth: 700,
-              margin: "0 auto",
-            }}
+            className="vs-body"
+            style={{ maxWidth: 620, margin: "14px auto 0" }}
           >
             Follow these rules to keep your driving record clean and avoid heavy fines
           </p>
@@ -49,20 +25,15 @@ export default function AvoidChallansSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: 24,
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 22,
           }}
         >
           {RULES.map((rule, i) => (
             <div
               key={i}
-              style={{
-                background: "#f7fafc",
-                border: "1px solid #e2e8f0",
-                borderRadius: 16,
-                padding: 24,
-                transition: "all 0.3s ease",
-              }}
+              className="vs-card vs-card-hover"
+              style={{ padding: 24 }}
             >
               <div
                 style={{
@@ -73,21 +44,15 @@ export default function AvoidChallansSection() {
                   fontSize: 11,
                   fontWeight: 700,
                   borderRadius: 6,
-                  marginBottom: 12,
-                  letterSpacing: "0.05em",
+                  marginBottom: 14,
+                  letterSpacing: ".05em",
                 }}
               >
                 PENALTY • {rule.penalty}
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <span style={{ fontSize: 28 }}>{rule.emoji}</span>
-                <span
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 600,
-                    color: "#1a202c",
-                  }}
-                >
+              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                <span style={{ fontSize: 30, lineHeight: 1 }}>{rule.emoji}</span>
+                <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text)", lineHeight: 1.4 }}>
                   {rule.text}
                 </span>
               </div>

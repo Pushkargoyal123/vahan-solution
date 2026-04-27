@@ -1,241 +1,168 @@
 "use client";
 
-import { useState } from "react";
-import { Car, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import LoginModal from "../Modal/LoginModal";
 import SignUpModal from "../Modal/SignUpModal";
 
-const NAV_LINKS = ["Home", "Services", "About", "Contact"];
+const NAV_LINKS = [
+  { label: "Home",     href: "#home",     id: "home" },
+  { label: "Services", href: "#services", id: "services" },
+  { label: "About",    href: "#about",    id: "about" },
+  { label: "Contact",  href: "#contact",  id: "contact" },
+];
 
-function NavLogo() {
+function SwirlLogo() {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-      <div
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: 10,
-          background: "#ff6b35",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Car style={{ width: 22, height: 22, color: "#fff" }} />
-      </div>
-      <div>
-        <div
-          style={{
-            fontSize: 20,
-            fontWeight: 800,
-            color: "#ffffff",
-            lineHeight: 1.1,
-          }}
-        >
-          Vahan
-        </div>
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "#60a5fa",
-          }}
-        >
-          Solutions
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function NavLinks() {
-  return (
-    <div
-      className="nav-desktop-links"
-      style={{ gap: 32, alignItems: "center" }}
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      className="nav-logo-swirl"
+      aria-hidden="true"
     >
-      {NAV_LINKS.map((item, i) => (
-        <a
-          key={item}
-          href={"#" + item.toLowerCase()}
-          style={{
-            fontSize: 14,
-            fontWeight: 500,
-            color: "rgba(255, 255, 255, 0.9)",
-            textDecoration: "none",
-            transition: "color 0.3s ease",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#ff6b35")}
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.color = "rgba(255, 255, 255, 0.9)")
-          }
-        >
-          {item}
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function NavButtons({ onLoginClick }: { onLoginClick: () => void }) {
-  return (
-    <div
-      className="nav-desktop-buttons"
-      style={{ gap: 12, alignItems: "center" }}
-    >
-      <button
-        onClick={onLoginClick}
-        style={{
-          padding: "10px 24px",
-          background: "transparent",
-          border: "1px solid rgba(255, 255, 255, 0.3)",
-          borderRadius: 10,
-          color: "#ffffff",
-          fontSize: 14,
-          fontWeight: 600,
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-        }}
-      >
-        Login
-      </button>
-      <button
-        style={{
-          padding: "10px 24px",
-          background: "#ff6b35",
-          border: "none",
-          borderRadius: 10,
-          color: "#ffffff",
-          fontSize: 14,
-          fontWeight: 600,
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-        }}
-      >
-        🚀 Get Free Help
-      </button>
-    </div>
-  );
-}
-
-function MobileMenu({ open }: { open: boolean }) {
-  if (!open) return null;
-  return (
-    <div
-      className="nav-mobile-menu"
-      style={{
-        backgroundColor: "#1e3a5f",
-        padding: "20px 24px",
-        flexDirection: "column",
-        gap: 16,
-        borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-      }}
-    >
-      {NAV_LINKS.map((item) => (
-        <a
-          key={item}
-          href={"#" + item.toLowerCase()}
-          style={{
-            fontSize: 14,
-            color: "rgba(255, 255, 255, 0.9)",
-            textDecoration: "none",
-          }}
-        >
-          {item}
-        </a>
-      ))}
-      <button
-        style={{
-          width: "100%",
-          padding: "12px 24px",
-          background: "#ff6b35",
-          border: "none",
-          borderRadius: 10,
-          color: "#ffffff",
-          fontSize: 14,
-          fontWeight: 600,
-          cursor: "pointer",
-        }}
-      >
-        🚀 Get Free Help
-      </button>
-    </div>
+      {/* Yin-yang swirl: orange right half, blue left half */}
+      <path d="M18,2 A16,16 0 0,1 18,34 A8,8 0 0,0 18,18 A8,8 0 0,1 18,2 Z" fill="#ff6b35" />
+      <path d="M18,2 A16,16 0 0,0 18,34 A8,8 0 0,1 18,18 A8,8 0 0,0 18,2 Z" fill="#3b82f6" />
+      <circle cx="18" cy="10" r="3.5" fill="#3b82f6" />
+      <circle cx="18" cy="26" r="3.5" fill="#ff6b35" />
+    </svg>
   );
 }
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const [modal, setModal] = useState<"none" | "login" | "signup">("none");
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    sections.forEach((s) => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <>
-      <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          backgroundColor: "#1e3a5f",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <style>{`
-        .nav-desktop-links { display: flex; }
-        .nav-desktop-buttons { display: flex; }
-        .nav-mobile-toggle { display: none; }
-        .nav-mobile-menu { display: none; }
+      <nav className={`nav-root ${scrolled ? "nav-scrolled" : "nav-top"}`}>
+        {/* Main bar */}
+        <div className="nav-inner">
+          {/* Logo */}
+          <a
+            href="#home"
+            style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}
+          >
+            <SwirlLogo />
+            <div>
+              <div style={{ fontSize: 19, fontWeight: 800, color: "var(--text)", lineHeight: 1.1 }}>
+                Vahan
+              </div>
+              <div
+                style={{
+                  fontSize: 9, fontWeight: 700, letterSpacing: "0.2em",
+                  textTransform: "uppercase", color: "var(--primary)",
+                }}
+              >
+                Solutions
+              </div>
+            </div>
+          </a>
 
-        @media (max-width: 768px) {
-          .nav-desktop-links { display: none !important; }
-          .nav-desktop-buttons { display: none !important; }
-          .nav-mobile-toggle { display: block !important; }
-          .nav-mobile-menu { display: flex !important; }
-        }
-      `}</style>
+          {/* Desktop links */}
+          <div className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className={`nav-link ${activeSection === l.id ? "nav-link-active" : ""}`}
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
 
-        <div
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            padding: "12px 24px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <NavLogo />
-          <NavLinks />
-          <NavButtons  onLoginClick={() => setModal("login")}/>
+          {/* Desktop actions */}
+          <div className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <button className="nav-btn-login" onClick={() => setModal("login")}>
+              Login
+            </button>
+            <button
+              className="vs-btn vs-btn-p"
+              style={{ padding: "9px 18px", fontSize: 14, borderRadius: 10 }}
+            >
+              <MessageCircle size={16} /> Get Free Help
+            </button>
+          </div>
 
-          {/* Mobile hamburger */}
+          {/* Hamburger */}
           <button
-            className="nav-mobile-toggle"
+            className="nav-hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "#ffffff",
+              display: "none", background: "none", border: "none",
+              cursor: "pointer", color: "var(--text)", alignItems: "center", padding: 4,
             }}
+            aria-label="Toggle menu"
           >
-            {menuOpen ? (
-              <X style={{ width: 24, height: 24 }} />
-            ) : (
-              <Menu style={{ width: 24, height: 24 }} />
-            )}
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        <MobileMenu open={menuOpen} />
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="nav-mobile-menu">
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className={`nav-mobile-link ${activeSection === l.id ? "nav-mobile-link-active" : ""}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {l.label}
+              </a>
+            ))}
+            <div
+              style={{
+                borderTop: "1px solid var(--border)",
+                paddingTop: 12, marginTop: 6,
+                display: "flex", flexDirection: "column", gap: 8,
+              }}
+            >
+              <button
+                className="nav-btn-login"
+                onClick={() => { setModal("login"); setMenuOpen(false); }}
+                style={{ width: "100%", borderRadius: 8, padding: 11 }}
+              >
+                Login
+              </button>
+              <button
+                className="vs-btn vs-btn-p"
+                style={{ width: "100%", justifyContent: "center", borderRadius: 8, padding: 12 }}
+              >
+                <MessageCircle size={16} /> Get Free Help
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
-       <LoginModal
+
+      <LoginModal
         isOpen={modal === "login"}
         onClose={() => setModal("none")}
-        onSwitchToSignUp={() => setModal("signup")}  // add this prop to LoginModal too
+        onSwitchToSignUp={() => setModal("signup")}
       />
       <SignUpModal
         isOpen={modal === "signup"}

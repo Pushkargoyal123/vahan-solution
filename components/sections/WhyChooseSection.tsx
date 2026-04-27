@@ -2,109 +2,75 @@ import { Lock, ListChecks, CreditCard, Zap } from "lucide-react";
 
 const FEATURES = [
   {
-    icon: <Lock style={{ width: 32, height: 32 }} />,
+    Icon: Lock,
     title: "Privacy-First OTP",
     description: "Challan details are securely accessed via OTP — your data stays private.",
+    num: "01",
   },
   {
-    icon: <ListChecks style={{ width: 32, height: 32 }} />,
+    Icon: ListChecks,
     title: "Select Your Challans",
     description: "Choose exactly which challans to pay — no unnecessary bulk payments.",
+    num: "02",
   },
   {
-    icon: <CreditCard style={{ width: 32, height: 32 }} />,
+    Icon: CreditCard,
     title: "Pay & Get Waiver",
     description: "Pay online instantly or apply for a waiver on compoundable offences.",
+    num: "03",
   },
   {
-    icon: <Zap style={{ width: 32, height: 32 }} />,
+    Icon: Zap,
     title: "Instant Receipt",
     description: "Get your receipt instantly after payment — no delays, no waiting.",
+    num: "04",
   },
 ];
 
 export default function WhyChooseSection() {
   return (
-    <section style={{ padding: "80px 0", backgroundColor: "#f7fafc" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <p
-            style={{
-              fontSize: 14,
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#ff6b35",
-              marginBottom: 12,
-            }}
-          >
-            What We Offer
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(32px, 5vw, 48px)",
-              fontWeight: 800,
-              color: "#1a202c",
-              marginBottom: 16,
-            }}
-          >
-            Why Choose <span style={{ color: "#ff6b35" }}>Vahan Solutions</span>
+    <section className="section-pad" style={{ background: "var(--bg-alt)" }}>
+      <div className="vs-container">
+        <div style={{ textAlign: "center", marginBottom: 52 }}>
+          <span className="vs-label">What Makes Us Different</span>
+          <h2 className="vs-h2">
+            Why Choose <span className="vs-accent">Vahan Solutions</span>
           </h2>
+          <div className="accent-line" style={{ margin: "14px auto 0" }} />
         </div>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 32,
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 26,
           }}
         >
-          {FEATURES.map((feature, i) => (
-            <div
-              key={i}
-              style={{
-                background: "#ffffff",
-                border: "1px solid #e2e8f0",
-                borderRadius: 20,
-                padding: 32,
-                transition: "all 0.3s ease",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
-              }}
-            >
+          {FEATURES.map(({ Icon, title, description, num }, i) => (
+            <div key={i} className="vs-card vs-card-hover">
               <div
                 style={{
-                  width: 64,
-                  height: 64,
-                  borderRadius: 16,
-                  background: "#ff6b35",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
                   marginBottom: 20,
-                  color: "#ffffff",
                 }}
               >
-                {feature.icon}
+                <div className="icon-wrap">
+                  <Icon size={28} />
+                </div>
+                <span
+                  style={{
+                    fontSize: 13, fontWeight: 800,
+                    color: "var(--border)",
+                    letterSpacing: ".04em",
+                  }}
+                >
+                  {num}
+                </span>
               </div>
-              <h3
-                style={{
-                  fontSize: 20,
-                  fontWeight: 700,
-                  color: "#1a202c",
-                  marginBottom: 12,
-                }}
-              >
-                {feature.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: 14,
-                  lineHeight: 1.7,
-                  color: "#718096",
-                }}
-              >
-                {feature.description}
-              </p>
+              <h3 className="vs-h3" style={{ marginBottom: 10 }}>{title}</h3>
+              <p className="vs-body" style={{ fontSize: 14 }}>{description}</p>
             </div>
           ))}
         </div>

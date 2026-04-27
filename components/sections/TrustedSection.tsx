@@ -2,96 +2,62 @@ import { Car, CheckCircle, TrendingUp, Award } from "lucide-react";
 
 const STATS = [
   {
-    icon: <Car style={{ width: 40, height: 40, color: "#ff6b35" }} />,
-    value: "11L+",
-    label: "Vehicles Protected",
+    Icon: Car,         value: "11L+",   label: "Vehicles Protected",
+    color: "#ff6b35",  bg: "rgba(255,107,53,.1)",   border: "rgba(255,107,53,.2)",
   },
   {
-    icon: <CheckCircle style={{ width: 40, height: 40, color: "#ff6b35" }} />,
-    value: "2L+",
-    label: "Challans Resolved",
+    Icon: CheckCircle, value: "2L+",    label: "Challans Resolved",
+    color: "#10b981",  bg: "rgba(16,185,129,.1)",  border: "rgba(16,185,129,.2)",
   },
   {
-    icon: <TrendingUp style={{ width: 40, height: 40, color: "#ff6b35" }} />,
-    value: "70Cr+",
-    label: "Legal Savings",
+    Icon: TrendingUp,  value: "₹70Cr+", label: "Legal Savings",
+    color: "#3b82f6",  bg: "rgba(59,130,246,.1)",  border: "rgba(59,130,246,.2)",
   },
   {
-    icon: <Award style={{ width: 40, height: 40, color: "#ff6b35" }} />,
-    value: "98%",
-    label: "Success Rate",
+    Icon: Award,       value: "98%",    label: "Success Rate",
+    color: "#f59e0b",  bg: "rgba(245,158,11,.1)",  border: "rgba(245,158,11,.2)",
   },
 ];
 
 export default function TrustedSection() {
   return (
-    <section style={{ padding: "60px 0", backgroundColor: "#f7fafc" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <p
-            style={{
-              fontSize: 14,
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#ff6b35",
-              marginBottom: 12,
-            }}
-          >
-            Trusted by Lakhs
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 800,
-              color: "#1a202c",
-            }}
-          >
-            India's leading challan resolution platform
-          </h2>
+    <section className="section-pad" style={{ background: "var(--bg-alt)" }}>
+      <div className="vs-container">
+        <div style={{ textAlign: "center", marginBottom: 52 }}>
+          <span className="vs-label">Trusted by Lakhs</span>
+          <h2 className="vs-h2">India's leading challan resolution platform</h2>
+          <div className="accent-line" style={{ margin: "14px auto 0" }} />
         </div>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: 24,
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: 22,
           }}
         >
-          {STATS.map((stat, i) => (
-            <div
-              key={i}
-              style={{
-                background: "#ffffff",
-                border: "1px solid #e2e8f0",
-                borderRadius: 16,
-                padding: 32,
-                textAlign: "center",
-                transition: "all 0.3s ease",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
-              }}
-            >
-              <div style={{ marginBottom: 16, display: "flex", justifyContent: "center" }}>
-                {stat.icon}
+          {STATS.map(({ Icon, value, label, color, bg, border }, i) => (
+            <div key={i} className="stat-card">
+              <div
+                style={{
+                  width: 62, height: 62, borderRadius: 14,
+                  background: bg, border: `1px solid ${border}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  margin: "0 auto 18px",
+                }}
+              >
+                <Icon style={{ width: 28, height: 28, color }} />
               </div>
               <div
                 style={{
-                  fontSize: 36,
-                  fontWeight: 900,
-                  color: "#1a202c",
-                  marginBottom: 8,
+                  fontSize: 38, fontWeight: 900, color: "var(--text)",
+                  marginBottom: 6, fontVariantNumeric: "tabular-nums",
                 }}
               >
-                {stat.value}
+                {value}
               </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  color: "#718096",
-                  fontWeight: 500,
-                }}
-              >
-                {stat.label}
+              <div style={{ fontSize: 14, fontWeight: 500, color: "var(--text-2)" }}>
+                {label}
               </div>
             </div>
           ))}

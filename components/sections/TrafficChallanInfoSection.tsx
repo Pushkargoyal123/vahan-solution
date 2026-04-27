@@ -1,68 +1,49 @@
 export default function TrafficChallanInfoSection() {
   return (
-    <section style={{ padding: "80px 0", backgroundColor: "#f7fafc" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+    <section className="section-pad" style={{ background: "var(--bg-alt)" }}>
+      <div className="vs-container">
+        <div className="info-grid">
+          {/* Text */}
           <div>
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "#ff6b35",
-                marginBottom: 16,
-              }}
-            >
-              Know More
-            </p>
-            <h2
-              style={{
-                fontSize: "clamp(28px, 4vw, 40px)",
-                fontWeight: 800,
-                color: "#1a202c",
-                marginBottom: 20,
-              }}
-            >
-              What is Traffic Challan?
+            <span className="vs-label">Know More</span>
+            <h2 className="vs-h2" style={{ marginBottom: 18 }}>
+              What is a Traffic Challan?
             </h2>
-            <p
-              style={{
-                fontSize: 16,
-                lineHeight: 1.8,
-                color: "#718096",
-                marginBottom: 24,
-              }}
-            >
-              Challan is a fine imposed by traffic police for rule violations and ensures road safety.
+            <p className="vs-body" style={{ marginBottom: 24 }}>
+              A challan is a fine imposed by traffic police for rule violations — ensuring road
+              safety and disciplined driving behaviour across India. Challans can be issued for
+              speeding, signal jumping, driving without a seatbelt, and many other offences.
             </p>
             <a
               href="#"
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                color: "#2563eb",
-                fontSize: 16,
-                fontWeight: 600,
+                fontSize: 15, fontWeight: 600, color: "var(--blue-dark)",
                 textDecoration: "none",
+                display: "inline-flex", alignItems: "center", gap: 6,
+                transition: "gap .2s",
               }}
             >
               Know more →
             </a>
           </div>
+
+          {/* Visual */}
           <div
             style={{
-              background: "#ffffff",
-              borderRadius: 20,
-              padding: 40,
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              background: "#fff", borderRadius: 20, padding: 44,
+              boxShadow: "var(--shadow-xl)", border: "1px solid var(--border)",
+              display: "flex", flexDirection: "column",
+              alignItems: "center", justifyContent: "center", textAlign: "center",
+              gap: 12,
             }}
           >
             <div style={{ fontSize: 80 }}>⚖️</div>
+            <p style={{ fontSize: 15, fontWeight: 700, color: "var(--text)" }}>
+              Legal &amp; Transparent
+            </p>
+            <p style={{ fontSize: 13, color: "var(--text-3)" }}>
+              100% compliant with Indian traffic laws
+            </p>
           </div>
         </div>
       </div>

@@ -37,107 +37,65 @@ const TESTIMONIALS = [
 
 export default function TestimonialsSection() {
   return (
-    <section style={{ padding: "80px 0", background: "linear-gradient(135deg, #1a2332 0%, #1e3a5f 100%)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2
-            style={{
-              fontSize: "clamp(32px, 5vw, 48px)",
-              fontWeight: 800,
-              color: "#ffffff",
-              textTransform: "uppercase",
-              letterSpacing: "0.02em",
-            }}
-          >
-            REAL STORIES, REAL SAVINGS
-          </h2>
+    <section
+      className="section-pad"
+      style={{
+        background: "linear-gradient(135deg, #0f2244 0%, #1e3a5f 60%, #2d5a8f 100%)",
+      }}
+    >
+      <div className="vs-container">
+        <div style={{ textAlign: "center", marginBottom: 52 }}>
+          <span className="vs-label" style={{ color: "#93c5fd" }}>What Our Clients Say</span>
+          <h2 className="vs-h2" style={{ color: "#fff" }}>Real Stories, Real Savings</h2>
+          <div className="accent-line" style={{ margin: "14px auto 0" }} />
         </div>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 24,
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 22,
           }}
         >
-          {TESTIMONIALS.map((testimonial, i) => (
-            <div
-              key={i}
-              style={{
-                background: "rgba(30, 58, 95, 0.4)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: 20,
-                padding: 28,
-                transition: "all 0.3s ease",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20 }}>
+          {TESTIMONIALS.map((t, i) => (
+            <div key={i} className="vs-card-dark">
+              {/* Decorative quote */}
+              <div className="quote-mark">"</div>
+
+              {/* Avatar + name */}
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 18 }}>
                 <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
+                  src={t.image}
+                  alt={t.name}
                   style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: "50%",
-                    border: "2px solid #10b981",
+                    width: 52, height: 52, borderRadius: "50%",
+                    border: "2px solid #10b981", objectFit: "cover", flexShrink: 0,
                   }}
                 />
-                <div style={{ flex: 1 }}>
-                  <h4
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 700,
-                      color: "#ffffff",
-                      marginBottom: 4,
-                    }}
-                  >
-                    {testimonial.name}
+                <div>
+                  <h4 style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 3 }}>
+                    {t.name}
                   </h4>
-                  <p
-                    style={{
-                      fontSize: 12,
-                      color: "rgba(255, 255, 255, 0.6)",
-                    }}
-                  >
-                    {testimonial.role}
-                  </p>
+                  <p style={{ fontSize: 12, color: "rgba(255,255,255,.5)" }}>{t.role}</p>
                 </div>
               </div>
 
-              <div
-                style={{
-                  display: "inline-block",
-                  background: "#10b981",
-                  padding: "6px 12px",
-                  borderRadius: 8,
-                  fontSize: 18,
-                  fontWeight: 800,
-                  color: "#ffffff",
-                  marginBottom: 16,
-                }}
-              >
-                {testimonial.saved}
-                <span style={{ fontSize: 12, fontWeight: 600, marginLeft: 4 }}>Saved</span>
+              {/* Savings badge */}
+              <div className="savings-pill">
+                {t.saved}
+                <span style={{ fontSize: 12, fontWeight: 600 }}>Saved</span>
               </div>
 
-              <div style={{ display: "flex", gap: 4, marginBottom: 12 }}>
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    style={{ width: 16, height: 16, fill: "#fbbf24", color: "#fbbf24" }}
-                  />
+              {/* Stars */}
+              <div style={{ display: "flex", gap: 3, marginBottom: 12 }}>
+                {Array.from({ length: t.rating }).map((_, j) => (
+                  <Star key={j} style={{ width: 15, height: 15, fill: "#fbbf24", color: "#fbbf24" }} />
                 ))}
               </div>
 
-              <p
-                style={{
-                  fontSize: 14,
-                  lineHeight: 1.7,
-                  color: "rgba(255, 255, 255, 0.8)",
-                  fontStyle: "italic",
-                }}
-              >
-                "{testimonial.text}"
+              {/* Quote text */}
+              <p style={{ fontSize: 14, lineHeight: 1.75, color: "rgba(255,255,255,.78)", fontStyle: "italic" }}>
+                "{t.text}"
               </p>
             </div>
           ))}
@@ -145,9 +103,9 @@ export default function TestimonialsSection() {
 
         {/* Pagination dots */}
         <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
-          <div style={{ width: 32, height: 4, background: "#ffffff", borderRadius: 2 }}></div>
-          <div style={{ width: 8, height: 4, background: "rgba(255, 255, 255, 0.3)", borderRadius: 2 }}></div>
-          <div style={{ width: 8, height: 4, background: "rgba(255, 255, 255, 0.3)", borderRadius: 2 }}></div>
+          <div style={{ width: 32, height: 4, background: "#fff", borderRadius: 2 }} />
+          <div style={{ width: 8,  height: 4, background: "rgba(255,255,255,.3)", borderRadius: 2 }} />
+          <div style={{ width: 8,  height: 4, background: "rgba(255,255,255,.3)", borderRadius: 2 }} />
         </div>
       </div>
     </section>

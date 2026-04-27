@@ -2,98 +2,66 @@ export default function CTASection() {
   return (
     <section
       style={{
-        padding: "80px 0",
-        background: "linear-gradient(135deg, #1e3a5f 0%, #2d5a8f 100%)",
+        padding: "88px 0",
+        background: "linear-gradient(135deg, #0f2244 0%, #1e3a5f 55%, #2d5a8f 100%)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+      {/* Decorative orbs */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute", top: -80, right: -80,
+          width: 320, height: 320, borderRadius: "50%",
+          background: "rgba(255,107,53,.06)", pointerEvents: "none",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute", bottom: -100, left: -100,
+          width: 400, height: 400, borderRadius: "50%",
+          background: "rgba(59,130,246,.05)", pointerEvents: "none",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute", top: "50%", left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 600, height: 600, borderRadius: "50%",
+          background: "rgba(255,255,255,.015)", pointerEvents: "none",
+        }}
+      />
+
+      <div
+        className="vs-container"
+        style={{ textAlign: "center", position: "relative", zIndex: 1 }}
+      >
+        <span className="vs-label" style={{ color: "#93c5fd" }}>Take Action Now</span>
+
         <h2
-          style={{
-            fontSize: "clamp(32px, 5vw, 48px)",
-            fontWeight: 800,
-            color: "#ffffff",
-            marginBottom: 20,
-          }}
+          className="vs-h2"
+          style={{ color: "#fff", marginBottom: 18 }}
         >
           Ready to Clear Your Challans?
         </h2>
+
         <p
           style={{
-            fontSize: 18,
-            color: "rgba(255, 255, 255, 0.9)",
-            marginBottom: 40,
-            maxWidth: 700,
-            margin: "0 auto 40px",
+            fontSize: 17, color: "rgba(255,255,255,.82)",
+            maxWidth: 620, margin: "0 auto 44px", lineHeight: 1.7,
           }}
         >
-          Join 5 million+ users who trust Vahan Solutions — India's most transparent challan platform.
+          Join 5 million+ users who trust Vahan Solutions — India's most transparent
+          challan platform.
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            gap: 16,
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <button
-            style={{
-              padding: "16px 32px",
-              background: "#ff6b35",
-              border: "none",
-              borderRadius: 12,
-              color: "#ffffff",
-              fontSize: 16,
-              fontWeight: 700,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              transition: "all 0.3s ease",
-              boxShadow: "0 10px 30px rgba(255, 107, 53, 0.4)",
-            }}
-          >
-            🔍 Check Challans Now
-          </button>
-          <button
-            style={{
-              padding: "16px 32px",
-              background: "#10b981",
-              border: "none",
-              borderRadius: 12,
-              color: "#ffffff",
-              fontSize: 16,
-              fontWeight: 700,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              transition: "all 0.3s ease",
-            }}
-          >
-            💬 WhatsApp Us
-          </button>
-          <button
-            style={{
-              padding: "16px 32px",
-              background: "transparent",
-              border: "2px solid rgba(255, 255, 255, 0.3)",
-              borderRadius: 12,
-              color: "#ffffff",
-              fontSize: 16,
-              fontWeight: 700,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              transition: "all 0.3s ease",
-            }}
-          >
-            📞 Request Callback
-          </button>
+        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+          <button className="vs-btn vs-btn-p vs-btn-lg">🔍 Check Challans Now</button>
+          <button className="vs-btn vs-btn-g vs-btn-lg">💬 WhatsApp Us</button>
+          <button className="vs-btn vs-btn-ghost vs-btn-lg">📞 Request Callback</button>
         </div>
       </div>
     </section>
